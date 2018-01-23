@@ -1,0 +1,322 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		06066F281ED601F700526E11 /* IrisRtcSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06066F271ED601F700526E11 /* IrisRtcSdk.framework */; };
+		067A3D141F0A87F100EFAFAF /* RNIrisSdkVideoCallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 067A3D131F0A87F100EFAFAF /* RNIrisSdkVideoCallView.m */; };
+		067A3D1A1F0A88D600EFAFAF /* RNIrisSdkVideoCallViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 067A3D191F0A88D600EFAFAF /* RNIrisSdkVideoCallViewManager.m */; };
+		0688B81E1F2F836E003EA38E /* RNIrisSdkStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688B81D1F2F836E003EA38E /* RNIrisSdkStreamManager.m */; };
+		0688B8201F2FB0BA003EA38E /* RNIrisVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688B81F1F2FB0BA003EA38E /* RNIrisVideoView.m */; };
+		0688B8221F2FB0CA003EA38E /* RNIrisVideoViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688B8211F2FB0CA003EA38E /* RNIrisVideoViewManager.m */; };
+		B3E7B58A1CC2AC0600A0062D /* RNIrisSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNIrisSdk.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		58B511D91A9E6C8500147676 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		06066F1F1ED5FF6800526E11 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		06066F211ED5FFDE00526E11 /* IrisRtcSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IrisRtcSdk.framework; path = "../../../../../../../Users/mganvi001c/Downloads/IrisRtcSdk-v3.0.0.12 (1)/IrisRtcSdk-Device-v3.0.0.12/IrisRtcSdk.framework"; sourceTree = "<group>"; };
+		06066F231ED600D500526E11 /* IrisRtcSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IrisRtcSdk.framework; path = "../../../../../../../Users/mganvi001c/Downloads/IrisRtcSdk-Simulator-v3.0.0.12/IrisRtcSdk.framework"; sourceTree = "<group>"; };
+		06066F271ED601F700526E11 /* IrisRtcSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IrisRtcSdk.framework; sourceTree = "<group>"; };
+		067A3D131F0A87F100EFAFAF /* RNIrisSdkVideoCallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIrisSdkVideoCallView.m; sourceTree = "<group>"; };
+		067A3D151F0A880000EFAFAF /* RNIrisSdkVideoCallView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNIrisSdkVideoCallView.h; sourceTree = "<group>"; };
+		067A3D191F0A88D600EFAFAF /* RNIrisSdkVideoCallViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIrisSdkVideoCallViewManager.m; sourceTree = "<group>"; };
+		067A3D1B1F0A88E000EFAFAF /* RNIrisSdkVideoCallViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNIrisSdkVideoCallViewManager.h; sourceTree = "<group>"; };
+		0688B81C1F2F835C003EA38E /* RNIrisSdkStreamManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNIrisSdkStreamManager.h; sourceTree = "<group>"; };
+		0688B81D1F2F836E003EA38E /* RNIrisSdkStreamManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIrisSdkStreamManager.m; sourceTree = "<group>"; };
+		0688B81F1F2FB0BA003EA38E /* RNIrisVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIrisVideoView.m; sourceTree = "<group>"; };
+		0688B8211F2FB0CA003EA38E /* RNIrisVideoViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIrisVideoViewManager.m; sourceTree = "<group>"; };
+		0688B8231F2FB0D3003EA38E /* RNIrisVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNIrisVideoView.h; sourceTree = "<group>"; };
+		0688B8241F2FB0DD003EA38E /* RNIrisVideoViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNIrisVideoViewManager.h; sourceTree = "<group>"; };
+		06BF29B41F068A0C0062D181 /* RNIrisSdk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNIrisSdk-Bridging-Header.h"; sourceTree = "<group>"; };
+		134814201AA4EA6300B7C361 /* libRNIrisSdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNIrisSdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3E7B5881CC2AC0600A0062D /* RNIrisSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNIrisSdk.h; sourceTree = "<group>"; };
+		B3E7B5891CC2AC0600A0062D /* RNIrisSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIrisSdk.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		58B511D81A9E6C8500147676 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06066F281ED601F700526E11 /* IrisRtcSdk.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		06066F1E1ED5FF6800526E11 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				06066F231ED600D500526E11 /* IrisRtcSdk.framework */,
+				06066F211ED5FFDE00526E11 /* IrisRtcSdk.framework */,
+				06066F1F1ED5FF6800526E11 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		134814211AA4EA7D00B7C361 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				134814201AA4EA6300B7C361 /* libRNIrisSdk.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		58B511D21A9E6C8500147676 = {
+			isa = PBXGroup;
+			children = (
+				067A3D191F0A88D600EFAFAF /* RNIrisSdkVideoCallViewManager.m */,
+				0688B81F1F2FB0BA003EA38E /* RNIrisVideoView.m */,
+				0688B8211F2FB0CA003EA38E /* RNIrisVideoViewManager.m */,
+				0688B8231F2FB0D3003EA38E /* RNIrisVideoView.h */,
+				0688B8241F2FB0DD003EA38E /* RNIrisVideoViewManager.h */,
+				067A3D1B1F0A88E000EFAFAF /* RNIrisSdkVideoCallViewManager.h */,
+				067A3D131F0A87F100EFAFAF /* RNIrisSdkVideoCallView.m */,
+				067A3D151F0A880000EFAFAF /* RNIrisSdkVideoCallView.h */,
+				06066F271ED601F700526E11 /* IrisRtcSdk.framework */,
+				B3E7B5881CC2AC0600A0062D /* RNIrisSdk.h */,
+				B3E7B5891CC2AC0600A0062D /* RNIrisSdk.m */,
+				0688B81C1F2F835C003EA38E /* RNIrisSdkStreamManager.h */,
+				0688B81D1F2F836E003EA38E /* RNIrisSdkStreamManager.m */,
+				134814211AA4EA7D00B7C361 /* Products */,
+				06066F1E1ED5FF6800526E11 /* Frameworks */,
+				06BF29B41F068A0C0062D181 /* RNIrisSdk-Bridging-Header.h */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		58B511DA1A9E6C8500147676 /* RNIrisSdk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNIrisSdk" */;
+			buildPhases = (
+				58B511D71A9E6C8500147676 /* Sources */,
+				58B511D81A9E6C8500147676 /* Frameworks */,
+				58B511D91A9E6C8500147676 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNIrisSdk;
+			productName = RCTDataManager;
+			productReference = 134814201AA4EA6300B7C361 /* libRNIrisSdk.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		58B511D31A9E6C8500147676 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					58B511DA1A9E6C8500147676 = {
+						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0830;
+					};
+				};
+			};
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNIrisSdk" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 58B511D21A9E6C8500147676;
+			productRefGroup = 58B511D21A9E6C8500147676;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				58B511DA1A9E6C8500147676 /* RNIrisSdk */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		58B511D71A9E6C8500147676 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0688B8201F2FB0BA003EA38E /* RNIrisVideoView.m in Sources */,
+				0688B8221F2FB0CA003EA38E /* RNIrisVideoViewManager.m in Sources */,
+				067A3D1A1F0A88D600EFAFAF /* RNIrisSdkVideoCallViewManager.m in Sources */,
+				067A3D141F0A87F100EFAFAF /* RNIrisSdkVideoCallView.m in Sources */,
+				B3E7B58A1CC2AC0600A0062D /* RNIrisSdk.m in Sources */,
+				0688B81E1F2F836E003EA38E /* RNIrisSdkStreamManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		58B511ED1A9E6C8500147676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		58B511EE1A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		58B511F01A9E6C8500147676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../../React/**",
+					"$(SRCROOT)/../../react-native/React/**",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RNIrisSdk;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNIrisSdk-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		58B511F11A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../../React/**",
+					"$(SRCROOT)/../../react-native/React/**",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RNIrisSdk;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNIrisSdk-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNIrisSdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58B511ED1A9E6C8500147676 /* Debug */,
+				58B511EE1A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNIrisSdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58B511F01A9E6C8500147676 /* Debug */,
+				58B511F11A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 58B511D31A9E6C8500147676 /* Project object */;
+}

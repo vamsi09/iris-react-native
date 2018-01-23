@@ -1,0 +1,6 @@
+framework module IrisRtcSdk {
+  umbrella header "IrisRtcSdk.h"
+
+  export *
+  module * { export * }
+}
