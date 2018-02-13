@@ -1,0 +1,5 @@
+rootProject.name = 'androidtest'
+include ':react-native-iris-sdk'
+project(':react-native-iris-sdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-iris-sdk/android')
+
+include ':app'

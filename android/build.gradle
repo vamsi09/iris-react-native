@@ -2,6 +2,9 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url  "http://dl.bintray.com/81813780/maven"
+        }
     }
 
     dependencies {
@@ -16,7 +19,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -32,5 +35,6 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
+    compile 'com.comcast:IrisRtcSdk:3.1.4'
 }
   
