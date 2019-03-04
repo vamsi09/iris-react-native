@@ -56,6 +56,10 @@ import IrisRtcSdk from 'react-native-iris-sdk';
 		console.log("Connection disconnected from iris backend");
 
 	});
+    IrisRtcSdk.events.addListener('onReconnecting', function() {
+    console.log("Connection Successful with iris backend");
+    // Let's make a call
+    });
 	IrisRtcSdk.events.addListener('onConnectionError', function(error) {
 		console.log("Failed with error [" + JSON.stringify(error) + "]");
 	});
@@ -84,12 +88,8 @@ import IrisRtcSdk from 'react-native-iris-sdk';
 
 		// Let's make a call
 		var config = {
-				idmUrl: 'idm.iris.comcast.net',
-				evmUrl: 'evm.iris.comcast.net',
-				token: irisToken,
-				domain: 'iristest.comcast.com',
-				routingId: RoutingId,
-				sourceTN: ''
+				sourceTN: '',
+                notificationPayload: ''
 				};
 		IrisRtcSdk.dial("", config);
 	});
