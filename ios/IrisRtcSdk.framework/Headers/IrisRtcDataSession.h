@@ -31,7 +31,7 @@
 /**
  * This method is called when data session is established with remote end.
  *
- * @param sessionId room id recieved from Iris backend..
+ * @param roomId     room id recieved from Iris backend.
  */
 - (void)onDataSessionConnected:(NSString *)roomId;
 
@@ -39,7 +39,8 @@
  * This method is called when complete image data available from remote end, 
     which is saved to a file in storage.
  *
- * @param filePath the url of the image saved in storage.
+ * @param filePath   the url of the image saved in storage.
+ * @param roomId     room id recieved from Iris backend.
  */
 - (void)onSessionDataWithImage:(NSString *)filePath roomId:(NSString *)roomId;
 

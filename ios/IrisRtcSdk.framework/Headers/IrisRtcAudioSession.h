@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger, IrisSIPStatus) {
     /** When the call is ringing
      *
      */
-    kRinging ,
+    //kRinging ,
     /** When the call is connected
      *
      */
@@ -66,7 +66,30 @@ typedef NS_ENUM(NSUInteger, IrisSIPStatus) {
     /** When the call is disconnected
      *
      */
-    kDisconnected
+    kDisconnected,
+    /** When the call is hold
+     *
+     */
+    kHold  
+};
+
+/** These are the different Iris RTC  call quality status
+ *
+ */
+typedef NS_ENUM(NSUInteger, IrisStreamQuality) {
+    
+    /** When the call is not hd
+     *
+     */
+    kNonHD ,
+    /** When the call is hd
+     *
+     */
+    kHD,
+    /** Default
+     *
+     */
+    kNONE
 };
 
 
@@ -80,17 +103,35 @@ typedef NS_ENUM(NSUInteger, IrisSIPStatus) {
  * This method is called when merging of active session with the held session for PSTN call.
  *
  * @param roomId room id recieved from Iris backend.
+ * @param traceId trace id.
  */
--(void)onSessionMerged:(NSString*)roomId;
-
-
+-(void)onSessionMerged:(NSString*)roomId traceId:(NSString *)traceId;
 /**
  * This method is called when we recieves status of ongoing PSTN call.
  *
  * @param status status of ongoing call.
  * @param roomId room id recieved from Iris backend.
+ * @param traceId trace id.
  */
--(void)onSessionSIPStatus:(IrisSIPStatus )status roomId:(NSString*)roomId;
+-(void)onSessionSIPStatus:(IrisSIPStatus )status roomId:(NSString*)roomId traceId:(NSString *)traceId;
+
+/**
+ * This method is called when session is about to start
+ *
+ * @param roomId room id recieved from Iris backend.
+ * @param traceId trace id.
+ */
+-(void)onSessionEarlyMedia:(NSString *)roomId traceId:(NSString *)traceId;
+
+/**
+ * This method is called to indicate the audio stream quality in the call.
+ *
+ * @param status status of ongoing call.
+ * @param roomId room id recieved from Iris backend.
+ * @param traceId trace id.
+ */
+@optional
+-(void)onStreamQualityIndicator:(IrisStreamQuality )quality roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 
 
@@ -145,6 +186,19 @@ typedef NS_ENUM(NSUInteger, IrisSIPStatus) {
  */
 -(BOOL)createWithRoomId:(NSString*)roomId participantId:(NSString*)participantId _sourceTelephoneNum:(NSString*)sourceTN _targetTelephoneNumber:(NSString*)targetTN  notificationData:(NSString*)notificationData stream:(IrisRtcStream*)stream sessionConfig:(IrisRtcSessionConfig *)sessionConfig delegate:(id<IrisRtcAudioSessionDelegate>)delegate error:(NSError**)outError;
 
+/**
+ * This method is called to create and start pstn/audio session which involves in creating the room using the target and source phone number
+ *
+ * @param targetTN        Contains target 10 digit telephone number.
+ * @param sourceTN        Contains source 10 digit telephone number.
+ * @param notificationData notificationData
+ * @param stream          local audio stream.
+ * @param sessionConfig    IrisRtcSessionConfig object for setting additional optional session configuaration parameters.
+ * @param delegate        delegate object for IrisRtcAudioSession,used to receive the callbacks.
+ * @param outError Provides error code and basic error description when any exception occured in api call.
+ */
+-(BOOL)createWithTN:(NSString*)targetTN _sourceTelephoneNum:(NSString*)sourceTN notificationData:(NSString*)notificationData stream:(IrisRtcStream*)stream sessionConfig:(IrisRtcSessionConfig *)sessionConfig delegate:(id<IrisRtcAudioSessionDelegate>)delegate error:(NSError**)outError;
+
 
 /**
  * This method is called to join pstn/audio session which involves joining the room using the room id recieved in notification.
@@ -177,6 +231,23 @@ typedef NS_ENUM(NSUInteger, IrisSIPStatus) {
 -(void)unhold;
 
 /**
+ * This method is called to activate audio while using callkit. Need to call this API in provider(_:didActivate:) delegate.
+ */
++(void)activateAudio;
+
+/**
+ * This method is called to deactivate audio while using callkit. Need to call this API in provider(_:didDeactivate:) delegate.
+ */
++(void)deactivateAudio;
+
+/**
+ * This method is called to get stream quality
+ *
+ * @param outError Provides error code and basic error description when any exception occured in api call.
+ */
+-(void)getStreamQuality:(NSError**)outError;
+
+/**
  * This method is called to merge the active session with the held session for PSTN call.
  *
  * @param heldSession   session which is on hold.
@@ -191,7 +262,16 @@ typedef NS_ENUM(NSUInteger, IrisSIPStatus) {
  * This method is called to close the session
  */
 -(void)close;
-
+/**
+ * This method is called to reject call
+ *
+ * @param roomId        Room Id of the already created room
+ * @param toId          Taget routing Id
+ * @param traceId       Trace Id.
+ * @param server        RTC server URL.
+ * @param outError      Provides error code and basic error description when any exception occured in api call.
+ */
++(BOOL)reject:(NSString *) roomId toId:(NSString *) toId traceId:(NSString *) traceId server:(NSString *) server error:(NSError**)outError;
 @end
 
 

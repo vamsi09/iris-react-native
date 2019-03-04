@@ -201,6 +201,7 @@ typedef NS_ENUM(NSUInteger, IrisRtcSdkStreamQuality) {
  * @param delegate The delegate object for the stream. The delegate will
  * receive delegate messages during execution of the operation when output is
  * generated and upon completion or failure of the operation.
+ * @param outError      Provides error code and basic error description when any exception occured in api call.
  */
 -(id)initWithDelegate:(id<IrisRtcStreamDelegate>)delegate error:(NSError **)outError;
 
@@ -215,6 +216,7 @@ typedef NS_ENUM(NSUInteger, IrisRtcSdkStreamQuality) {
  * @param delegate The delegate object for the stream. The delegate will
  * receive delegate messages during execution of the operation when output is
  * generated and upon completion or failure of the operation.
+ * @param outError      Provides error code and basic error description when any exception occured in api call.
  */
 -(id)initWithType:(IrisRtcSdkStreamType)type quality:(IrisRtcSdkStreamQuality)quality
        cameraType:(IrisRtcCameraType)cameraType delegate:(id<IrisRtcStreamDelegate>)delegate error:(NSError **)outError;

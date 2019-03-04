@@ -138,6 +138,12 @@ typedef NS_ENUM(NSUInteger, IrisNetworkType) {
 
 @property(nonatomic) NSInteger statsCollectorInterval;
 
+/**
+ * private variable
+ * set ToDomain
+ */
+@property(nonatomic) NSString* toDomain;
+
 @end
 
 /**
@@ -150,15 +156,17 @@ typedef NS_ENUM(NSUInteger, IrisNetworkType) {
  * Callback:This method is called when the room is created successfully.
  *
  * @param roomId room id.
+ * @param traceId trace id.
  */
--(void)onSessionCreated:(NSString *)roomId;
+-(void)onSessionCreated:(NSString *)roomId traceId:(NSString *)traceId;
 
 /**
  * Callback: This is called when the room is joined successfully from reciever.
  *
  * @param roomId room id.
+ * @param traceId trace id.
  */
--(void)onSessionJoined:(NSString *)roomId;
+-(void)onSessionJoined:(NSString *)roomId traceId:(NSString *)traceId;
 
 
 /**
@@ -166,30 +174,35 @@ typedef NS_ENUM(NSUInteger, IrisNetworkType) {
  *
  * @param participantId paritcipant id.
  * @param roomId room id.
+ * @param traceId trace id.
  */
--(void)onSessionParticipantJoined:(NSString *)participantId roomId:(NSString*)roomId;
+-(void)onSessionParticipantJoined:(NSString *)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 /**
  * Callback: This is called when the Ice connection state that is,session is connected.
  *
  * @param roomId room id.
+ * @param traceId trace id.
  */
--(void)onSessionConnected:(NSString *)roomId;
+-(void)onSessionConnected:(NSString *)roomId traceId:(NSString *)traceId;
 
 /**
  * Callback: This is called when the session ends.
  *
  * @param roomId room id.
+ * @param traceId trace id.
+ *
  */
-- (void)onSessionEnded:(NSString*)roomId;
+- (void)onSessionEnded:(NSString*)roomId traceId:(NSString *)traceId;
 
 /**
  * Callback: This is called when the participant leaves the room.
  *
  * @param participantId paritcipant id.
  * @param roomId room id.
+ * @param traceId trace id.
  */
-- (void)onSessionParticipantLeft:(NSString*)participantId roomId:(NSString*)roomId;
+- (void)onSessionParticipantLeft:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 /**
  * Callback: This is called when the participant profile is changed.
@@ -197,34 +210,38 @@ typedef NS_ENUM(NSUInteger, IrisNetworkType) {
  * @param participantId paritcipant id.
  * @param userprofile  IriRtcuserProfile object containing participant's name and image url .
  * @param roomId room id.
+ * @param traceId trace id.
  */
-- (void)onSessionParticipantProfile:(NSString*)participantId userProfile:(IrisRtcUserProfile*)userprofile roomId:(NSString*)roomid;
+- (void)onSessionParticipantProfile:(NSString*)participantId userProfile:(IrisRtcUserProfile*)userprofile roomId:(NSString*)roomid traceId:(NSString *)traceId;
 
 /**
  * Callback: This is called when dominant speaker is changed in multiple stream.
  *
  * @param participantId paritcipant id.
  * @param roomId room id.
+ * @param traceId trace id.
  *
  */
-- (void)onSessionDominantSpeakerChanged:(NSString*)participantId roomId:(NSString*)roomId;
+- (void)onSessionDominantSpeakerChanged:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 /**
  * Callback: This is called when stream of particular particiapnt is activated/viewed in multiple stream.
  *
  * @param participantId paritcipant id.
  * @param roomId room id.
+ * @param traceId trace id.
  *
  */
 @optional
-- (void)onSessionRemoteParticipantActivated:(NSString*)participantId roomId:(NSString*)roomId;
+- (void)onSessionRemoteParticipantActivated:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 /**
  * Callback: This is called when remote participant is not responding.
  *
  * @param participantId paritcipant id.
  * @param roomId room id.
+ * @param traceId trace id.
  *
  */
-- (void)onSessionParticipantNotResponding:(NSString*)participantId roomId:(NSString*)roomId;
+- (void)onSessionParticipantNotResponding:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 /**
  * Callback: This is called when there is change in sessiontype.
@@ -232,44 +249,49 @@ typedef NS_ENUM(NSUInteger, IrisNetworkType) {
  * @param sessionType session type.
  * @param participantId paritcipant id.
  * @param roomId room id.
+ * @param traceId trace id.
  *
  */
 @optional
-- (void)onSessionTypeChanged:(NSString*)sessionType participantId:(NSString*)participantId roomId:(NSString*)roomId;
+- (void)onSessionTypeChanged:(NSString*)sessionType participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 /**
  * Callback: This is called when audio of remote participant muted or unmuted.
  *
  * @param mute audio state mute or unmute.
  * @param participantId paritcipant id.
  * @param roomId room id.
+ * @param traceId trace id.
  *
  */
 @optional
-- (void)onSessionParticipantAudioMuted:(BOOL)mute participantId:(NSString*)participantId roomId:(NSString*)roomId;
+- (void)onSessionParticipantAudioMuted:(BOOL)mute participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 /**
  * Callback: This is called when video of remote participant muted or unmuted.
  *
  * @param mute video state mute or unmute.
  * @param participantId paritcipant id.
  * @param roomId room id.
+ * @param traceId trace id.
  */
 @optional
-- (void)onSessionParticipantVideoMuted:(BOOL)mute participantId:(NSString*)participantId roomId:(NSString*)roomId;
+- (void)onSessionParticipantVideoMuted:(BOOL)mute participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 /**
  * Callback: This is called when there is error while the session is active.
  *
- * @param error The basic error code details.
- * @param additionalInfo  Additional error details including description.
- * @param roomId room id.
+ * @param error     The basic error code details.
+ * @param info      Additional error details including description.
+ * @param roomId    room id.
+ * @param traceId   trace id.
  */
-- (void)onSessionError:(NSError*)error withAdditionalInfo:(NSDictionary *)info roomId:(NSString*)roomId;
+- (void)onSessionError:(NSError*)error withAdditionalInfo:(NSDictionary *)info roomId:(NSString*)roomId traceId:(NSString *)traceId;
 /**
  * Callback: This is called when there is any message is to be convey to the app.
  *
  * @param log message to the app.
  * @param roomId room id.
+ * @param traceId trace id.
  */
-- (void)onLogAnalytics:(NSString*)log roomId:(NSString*)roomId;
+- (void)onLogAnalytics:(NSString*)log roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 /**
  * This method will return stats that are collected during session.
@@ -316,8 +338,15 @@ typedef NS_ENUM(NSUInteger, IrisNetworkType) {
 @property (nonatomic) NSString* traceId;
 
 
+/**
+ * private variable
+ */
+@property(nonatomic) BOOL useAnonymousRoom;
+
 
 -(void)close;
+
+-(void) setStatsWS: (bool) flag;
 
 @end
 #endif /* IrisRtcSession_h */

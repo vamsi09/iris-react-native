@@ -59,14 +59,29 @@
  * If you created your project with a previous version of Xcode, you may need to add the DEBUG macro manually.
  **/
 
-#import <CocoaLumberjack/CocoaLumberjack.h>
+@import CocoaLumberjack;
 
 // Global flag to enable/disable logging throughout the entire iris framework.
 
 
+//For Debug build enable Iris logs
+#ifdef DEBUG
+
 #ifndef IRIS_LOGGING_ENABLED
 #define IRIS_LOGGING_ENABLED 1
 #endif
+
+#endif
+
+//For Release build disable Iris logs
+#ifndef DEBUG
+
+#ifndef IRIS_LOGGING_ENABLED
+#define IRIS_LOGGING_ENABLED 1
+#endif
+
+#endif
+
 
 // Define logging context for every log message coming from the IRIS framework.
 // The logging context can be extracted from the DDLogMessage from within the logging framework.

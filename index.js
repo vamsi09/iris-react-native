@@ -19,7 +19,7 @@ if (IrisRtcSdk) {
 // Add support for dial function
 if (IrisRtcSdk) {
     // dial function allows to make a call
-    IrisRtcSdk.dial = function(number, config) {
+    /*IrisRtcSdk.dial = function(number, config) {
         // Send a request to get the routing id
         fetch('https://' + config.idmUrl + '/v1/routingid/appdomain/' + config.domain + '/publicid/' + number, {
                 method: 'GET',
@@ -87,6 +87,23 @@ if (IrisRtcSdk) {
                     .done();
             })
             .done();
+    }*/
+
+    IrisRtcSdk.dial = function(number, config) {
+        // Send a request to get the routing id
+        
+                        if (config) {
+                            IrisRtcSdk.createAudioStream();
+                            console.log(' createAudioSession called ');
+
+                            IrisRtcSdk.createAudioSession1(number,
+                                config.sourceTN,
+                                config.notificationData);
+                        } else {
+                            throw new Error("config doesn't exist");
+                        }
+
+                   
     }
 }
 var IrisRtcVideoCallView = requireNativeComponent('IrisRtcVideoCallView', IrisVideoCallView);

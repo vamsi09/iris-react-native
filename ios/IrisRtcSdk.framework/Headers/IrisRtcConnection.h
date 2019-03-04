@@ -34,6 +34,10 @@ typedef NS_ENUM(NSUInteger, IrisRtcConnectionState) {
      *
      */
     kConnectionStateConnected,
+    /** When the connection is reconnecting with backend
+     *
+     */
+    kConnectionStateReconnecting,
     /** When the connection is authenticated with backend
      *
      */
@@ -87,6 +91,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 - (void)onConnected;
+/** This method is called when the connection is reconnecting
+ */
+- (void)onReconnecting;
 
 /** This method is called when the connection is disconnected
  *
@@ -125,6 +132,10 @@ NS_ASSUME_NONNULL_BEGIN
  * private variable used to acces the different IrisRtcConnectionStates.
  */
 @property (readonly) IrisRtcConnectionState state;
+/**
+ * private variable used to acces the different IrisRtcConnectionStates.
+ */
+@property BOOL enableReconnect;
 
 /**
  * private variable used to set pingtimeInterval.
@@ -137,6 +148,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 @property(nonatomic) NSTimeInterval pingTimeoutInterval;
+
+/**
+ * private variable used to set pingtimeoutInterval.
+ *
+ */
+@property(nonatomic) BOOL isAnonymousRoom;
+
 
 /** This method is used to get current instance of IrisRtcConnection object. The use of this method is to 
  * avoid creating multiple IriRtcConnection objects.
@@ -201,7 +219,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * This method is called to renew the JWT token.
  *
- * @param token JWT token.
+ * @param token     JWT token.
+ * @param outError  Provides error code and basic error description when any exception occured in api call.
  */
 -(BOOL)setIrisToken:(nonnull NSString *)token error:(NSError* _Nullable *)outError;
 

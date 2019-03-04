@@ -9,6 +9,7 @@
 // Constant string for sending events
 NSString *  IrisEventOnConnected = @"onConnected";
 NSString *  IrisEventOnDisconnected = @"onDisconnected";
+NSString *  IrisEventOnReconnecting = @"onReconnecting";
 NSString *  IrisEventOnConnectionError = @"onConnectionError";
 NSString *  IrisEventOnNotification = @"onNotification";
 
@@ -175,6 +176,16 @@ RCT_EXPORT_METHOD(disconnect)
     RCTLogInfo(@"React::IrisRtcSdk onDisconnected");
     isConnected = false;
     [self sendEventWithName:IrisEventOnDisconnected body:nil];
+}
+
+/** This method is called when the connection is broken and trying to reconnect back
+ *
+ */
+- (void)onReconnecting
+{
+    RCTLogInfo(@"React::IrisRtcSdk onReconnecting");
+    isConnected = false;
+    [self sendEventWithName:IrisEventOnReconnecting body:nil];
 }
 
 /** This method is called when there is an error
@@ -374,6 +385,45 @@ RCT_EXPORT_METHOD(createAudioSession:(NSString*)roomId participantId:(NSString*)
     }
     audioSessionArray[roomId] = audioSession;
 }
+
+/** This method is called to create a audio session
+ *
+ */
+RCT_EXPORT_METHOD(createAudioSession1:(NSString*)targetTN _sourceTelephoneNumber:(NSString*)sourceTN  notificationData:(NSString*)notificationData)
+
+{
+    RCTLogInfo(@"React::IrisRtcSdk createAudioSession1 called with Src TN %@ Target TN %@ notificationdata %@", sourceTN, targetTN, notificationData );
+    
+    if (audioStream == nil)
+    {
+        audioStream = [[IrisRtcStream alloc] initWithType:kStreamTypeAudio quality:kStreamQualityFullHD
+                                               cameraType:kCameraTypeFront delegate:self error:nil];
+        RCTLogInfo(@"React::IrisRtcSdk createAudioStream1 done ");
+        
+    }
+    if([[IrisRtcConnection sharedInstance]state] != kConnectionStateAuthenticated){
+        RCTLogInfo(@"React::IrisRtcSdk IrisRtcConnection is not connected ");
+        return;
+    }
+    
+    if([IrisRtcConnection sharedInstance] )
+    [audioStream startPreview];
+    audioSession = [[IrisRtcAudioSession alloc] init];
+    audioSession.autoDisconnect = true;
+    
+    audioSession.isVideoBridgeEnable = true;
+    IrisRtcSessionConfig *sessionConfig = [[IrisRtcSessionConfig alloc] init];
+    
+    [audioSession createWithTN:targetTN _sourceTelephoneNum:sourceTN notificationData:notificationData stream:audioStream sessionConfig:sessionConfig delegate:self error:nil];
+    
+    
+    if (audioSessionArray == nil)
+    {
+        audioSessionArray = [[NSMutableDictionary alloc] init];
+    }
+    audioSessionArray[targetTN] = audioSession;
+}
+
 
 /**
  * This method is called to join pstn/audio session which involves joining the room using the room id recieved in notification.
@@ -1051,7 +1101,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param session   pointer to IrisRtcSession.
  * @param sessionId room id.
  */
--(void)onSessionCreated:(NSString *)roomId
+-(void)onSessionCreated:(NSString *)roomId traceId:(NSString *)traceId;
 {
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
     [details setValue:roomId forKey:@"SessionId"];
@@ -1066,7 +1116,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param session   pointer to IrisRtcSession.
  * @param sessionId room id.
  */
--(void)onSessionJoined:(NSString *)roomId
+-(void)onSessionJoined:(NSString *)roomId traceId:(NSString *)traceId;
 {
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
     [details setValue:roomId forKey:@"SessionId"];
@@ -1080,7 +1130,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param session   pointer to IrisRtcSession.
  * @param sessionId room id.
  */
--(void)onSessionParticipantConnected:(NSString *)roomId
+-(void)onSessionParticipantConnected:(NSString *)roomId traceId:(NSString *)traceId;
 {
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
     [details setValue:roomId forKey:@"SessionId"];
@@ -1096,7 +1146,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param sessionId room id.
  * @param participantName remote participant name.
  */
--(void)onSessionParticipantJoined:(NSString *)participantId roomId:(NSString *)roomId
+-(void)onSessionParticipantJoined:(NSString *)participantId roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     NSLog(@"onSessionParticipantJoined participantId = %@ RoomId = %@",participantId,roomId);
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
@@ -1112,7 +1162,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param session   pointer to IrisRtcSession.
  * @param sessionId room id.
  */
--(void)onSessionConnected:(NSString *)roomId
+-(void)onSessionConnected:(NSString *)roomId traceId:(NSString *)traceId;
 {
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
     [details setValue:roomId forKey:@"SessionId"];
@@ -1130,7 +1180,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param routingId target routingId.
  * @param message   Text from message.
  */
--(void)onSessionParticipantMessage:(IrisChatMessage*)message participantId:(NSString*)participantId roomId:(NSString*)roomId
+-(void)onSessionParticipantMessage:(IrisChatMessage*)message participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 {
     NSLog(@"onSessionParticipantMessage participantId = %@ RoomId = %@ message = %@",participantId,roomId,message.data);
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
@@ -1152,7 +1202,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param session   pointer to IrisRtcSession.
  * @param sessionId room id.
  */
-- (void)onSessionEnded:(NSString*)roomId
+- (void)onSessionEnded:(NSString*)roomId traceId:(NSString *)traceId;
 {
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
     [details setValue:roomId forKey:@"SessionId"];
@@ -1167,7 +1217,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param sessionId room id.
  * @param participantName  name of the participant who left the room .
  */
--(void)onSessionParticipantLeft:(NSString *)participantId roomId:(NSString *)roomId
+-(void)onSessionParticipantLeft:(NSString *)participantId roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     NSLog(@"onSessionParticipantLeft participantId = %@ RoomId = %@",participantId,roomId);
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
@@ -1183,11 +1233,11 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param sessionId room id.
  * @param participantName  name of the participant who left the room .
  */
--(void)onSessionParticipantNotResponding:(NSString *)participantId roomId:(NSString *)roomId
+-(void)onSessionParticipantNotResponding:(NSString *)participantId roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     
 }
--(void)onSessionTypeChanged:(NSString *)sessionType participantId:(NSString *)participantId roomId:(NSString *)roomId
+-(void)onSessionTypeChanged:(NSString *)sessionType participantId:(NSString *)participantId roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     NSLog(@"RNIrisSdk::onSessionTypeChanged to %@ for %@",sessionType,participantId);
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
@@ -1198,12 +1248,12 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
     [self sendEventWithName:IrisEventOnSessionTypeChanged body:details];
 }
 
--(void)onSessionRemoteParticipantActivated:(NSString *)participantId roomId:(NSString *)roomId
+-(void)onSessionRemoteParticipantActivated:(NSString *)participantId roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     
 }
 
-- (void)onSessionParticipantProfile:(NSString *)participantId userProfile:(IrisRtcUserProfile *)userprofile roomId:(NSString *)roomid
+- (void)onSessionParticipantProfile:(NSString *)participantId userProfile:(IrisRtcUserProfile *)userprofile roomId:(NSString *)roomid traceId:(NSString *)traceId;
 {
     
 }
@@ -1214,7 +1264,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param error The basic error code details.
  * @param additionalInfo  Additional error details including description.
  */
--(void)onSessionError:(NSError *)error withAdditionalInfo:(NSDictionary *)info roomId:(NSString *)roomId
+-(void)onSessionError:(NSError *)error withAdditionalInfo:(NSDictionary *)info roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     RCTLogInfo(@"React::onSessionError = %@ for roomId : %@", error.description,roomId);
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
@@ -1230,7 +1280,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  *
  * @param log message to the app.
  */
--(void)onLogAnalytics:(NSString *)log roomId:(NSString *)roomId
+-(void)onLogAnalytics:(NSString *)log roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     RCTLogInfo(@"React::IrisRtcSdk onLogAnalytics called with %@ for roomId : %@", log,roomId);
 
@@ -1242,11 +1292,11 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param IrisRtcSession pointer to the IrisRtcSession
  * @param sessionId room id recieved from Iris backend.
  */
--(void)onSessionMerged:(NSString *)roomId
+-(void)onSessionMerged:(NSString *)roomId traceId:(NSString *)traceId;
 {
     
 }
--(void)onSessionSIPStatus:(IrisSIPStatus)status roomId:(NSString *)roomId
+-(void)onSessionSIPStatus:(IrisSIPStatus)status roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     RCTLogInfo(@"React::IrisRtcSdk onSessionSIPStatus called with %lu", (unsigned long)status);
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
@@ -1257,13 +1307,18 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
 
 }
 
+- (void)onSessionEarlyMedia:(NSString *)roomId traceId:(NSString *)traceId {
+    
+}
+
+
 /**
  * Callback: This is called when dominant speaker is changed in multiple stream.
  *
  * @param rotingId dominant speaker routingid.
  *
  */
--(void)onSessionDominantSpeakerChanged:(NSString *)participantId roomId:(NSString *)roomId
+-(void)onSessionDominantSpeakerChanged:(NSString *)participantId roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     RCTLogInfo(@"React::IrisRtcSdk onSessionDominantSpeakerChanged called with %@", participantId);
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
@@ -1279,7 +1334,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  *
  * @param ChatAck message string
  */
--(void)onChatMessageSuccess:(IrisChatMessage *)message roomId:(NSString *)roomId
+-(void)onChatMessageSuccess:(IrisChatMessage *)message roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
 
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
@@ -1298,7 +1353,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param messageId messageid of chat message
  * @param info additional info about error.
  */
--(void)onChatMessageError:(NSString *)messageId withAdditionalInfo:(NSDictionary *)info roomId:(NSString *)roomId
+-(void)onChatMessageError:(NSString *)messageId withAdditionalInfo:(NSDictionary *)info roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
     [details setValue:messageId forKey:@"messageId"];
@@ -1316,7 +1371,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param roomId  recieved from Iris backend.
  * @param participantId  recieved from Iris backend.
  */
--(void)onChatMessageState:(IrisChatState)state participantId:(NSString*)participantId roomId:(NSString*)roomId
+-(void)onChatMessageState:(IrisChatState)state participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 {
     
     NSString* stateString;
@@ -1356,7 +1411,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  *
  * @param track pointer to the IrisRtcMediaTrack containing remote track.
  */
--(void)onAddRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString *)participantId roomId:(NSString *)roomId
+-(void)onAddRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString *)participantId roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     NSString *uuid = participantId;
     if (uuid == nil)
@@ -1404,7 +1459,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  *
  * @param track pointer to the IrisRtcMediaTrack containing remote track.
  */
--(void)onRemoveRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString *)participantId roomId:(NSString *)roomId
+-(void)onRemoveRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString *)participantId roomId:(NSString *)roomId traceId:(NSString *)traceId;
 {
     NSString *uuid = participantId;
     RCTLogInfo(@"React::IrisRtcSdk onRemoveRemoteStream called with %@", participantId);
@@ -1433,7 +1488,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  *
  */
 
-- (void)onSessionParticipantAudioMuted:(BOOL)mute participantId:(NSString*)participantId roomId:(NSString*)roomId{
+- (void)onSessionParticipantAudioMuted:(BOOL)mute participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;{
     RCTLogInfo(@"React::IrisRtcSdk onSessionParticipantAudioMuted called with %@", participantId);
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
     [details setValue:participantId forKey:@"RoutingId"];
@@ -1449,7 +1504,7 @@ RCT_EXPORT_METHOD(sendChatState:(NSString*)RoomId state:(NSString *)_state)
  * @param roomId room id.
  */
 
-- (void)onSessionParticipantVideoMuted:(BOOL)mute participantId:(NSString*)participantId roomId:(NSString*)roomId{
+- (void)onSessionParticipantVideoMuted:(BOOL)mute participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;{
     RCTLogInfo(@"React::IrisRtcSdk onSessionParticipantVideoMuted called with %@", participantId);
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
     [details setValue:participantId forKey:@"RoutingId"];

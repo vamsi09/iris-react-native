@@ -37,8 +37,9 @@
  * @param message Chat message string
  * @param participantId Participant Id sending the chat message
  * @param roomId Room Identifier for the allocated  chat room for the participants
+ * @param traceId trace Id.
  */
--(void)onSessionParticipantMessage:(IrisChatMessage*)message participantId:(NSString*)participantId roomId:(NSString*)roomId;
+-(void)onSessionParticipantMessage:(IrisChatMessage*)message participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 /**
  * This method is called as an  acknowledggment of  chat message sent to participant.
@@ -46,8 +47,9 @@
  *
  * @param message ChatAck message string
  * @param roomId Room Identifier for the allocated  chat room for the participants
+ * @param traceId trace Id.
  */
--(void)onChatMessageSuccess:(IrisChatMessage*)message roomId:(NSString*)roomId;
+-(void)onChatMessageSuccess:(IrisChatMessage*)message roomId:(NSString*)roomId traceId:(NSString *)traceId;
 /**
  * This method is called as when  chat message is not sent to participant.
  *
@@ -55,8 +57,9 @@
  * @param messageId messageid of chat message
  * @param info additional info about error.
  * @param roomId Room Identifier for the allocated  chat room for the participants
+ * @param traceId trace Id.
  */
--(void)onChatMessageError:(NSString*)messageId withAdditionalInfo:(NSDictionary *)info roomId:(NSString *)roomId;
+-(void)onChatMessageError:(NSString*)messageId withAdditionalInfo:(NSDictionary *)info roomId:(NSString *)roomId traceId:(NSString *)traceId;
 
 /**
  * This method is used for seding chat message state .
@@ -64,8 +67,9 @@
  * @param state chat state
  * @param participantId Participant Id sending the chat message
  * @param roomId Room Identifier for the allocated  chat room for the participants
+ * @param traceId trace Id.
  */
--(void)onChatMessageState:(IrisChatState)state participantId:(NSString*)participantId roomId:(NSString*)roomId;
+-(void)onChatMessageState:(IrisChatState)state participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 
 @end
@@ -141,6 +145,9 @@
  */
 /**
  * This method is used for sending chat message.
+ *
+ * @param message   Chat message that needs to be sent
+ * @param outError  Provides error code and basic error description when any exception occured in api call.
  */
 -(BOOL)sendChatMessage:(IrisChatMessage*)message error:(NSError**)outError;
 /**-----------------------------------------------------------------------------
@@ -149,6 +156,8 @@
  */
 /**
  * This method is used for sending chat state.
+ *
+ * @param state   Chat state
  */
 -(void)sendChatState:(IrisChatState)state;
 

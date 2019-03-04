@@ -41,8 +41,9 @@
  * @param track pointer to the IrisRtcMediaTrack containing remote track.
  * @param participantId Participant Id.
  * @param roomId Room Id.
+ * @param traceId trace Id.
  */
--(void)onAddRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString*)participantId roomId:(NSString*)roomId;
+-(void)onAddRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 /**
  * This method is called when the remote stream is removed from the peerconnection.
@@ -50,8 +51,9 @@
  * @param track pointer to the IrisRtcMediaTrack containing remote track.
  * @param participantId Participant Id.
  * @param roomId Room Id.
+ * @param traceId trace Id.
  */
--(void)onRemoveRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString*)participantId roomId:(NSString*)roomId;
+-(void)onRemoveRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 @end
 
@@ -80,7 +82,7 @@
  * For anonymous room, set 'useAnonymousRoom' with room name and
  * pass nil as participants while creating session.
  */
-@property(nonatomic) NSString* useAnonymousRoom;
+//@property(nonatomic) NSString* useAnonymousRoom;
 
 
 
@@ -101,6 +103,16 @@
  * set isVideoBridgeEnable as true  to make calls using videobridge.
  */
 @property BOOL isVideoBridgeEnable;
+/**
+ * Creating and starting a video session using the anonymous room name.
+ *
+ * @param roomName anonymous room name.
+ * @param sessionConfig     IrisRtcSessionConfig object for setting additional optional session configuaration parameters.
+ * @param stream       local stream.
+ * @param delegate     The delegate object for IrisRtcVideoSession used to receive the callbacks.
+ * @param outError Provides error code and basic error description when any exception occured in api call.
+ */
+-(BOOL)createWithRoomName:(NSString* )roomName sessionConfig:(IrisRtcSessionConfig *)sessionConfig stream:(IrisRtcStream*)stream delegate:(id<IrisRtcVideoSessionDelegate>)delegate error:(NSError**)outError;
 
 /**
  * Creating and starting a video session using the room id for the room which has been already allocated for the invloved participants.
@@ -152,10 +164,10 @@
  *
  * @param sessionId room id
  * @param roomToken         rooomtoken  which is received in notification.
- * @param roomTokenExpiryTime   rommtokenexpiry which is received in notification.
- * @param rtcServer   rtcServerURL.
- * @param delegate  The delegate object for IrisRtcVideoSession,used to receive the callbacks.
- * @param outError Provides error code and basic error description when any exception occured in api call.
+ * @param roomTokenExpiry   rommtokenexpiry which is received in notification.
+ * @param rtcServer         rtcServerURL.
+ * @param delegate          The delegate object for IrisRtcVideoSession,used to receive the callbacks.
+ * @param outError          Provides error code and basic error description when any exception occured in api call.
  */
 -(BOOL)joinWithSessionId:(NSString*)sessionId roomToken:(NSString*)roomToken roomTokenExpiryTime:(NSInteger)roomTokenExpiry rtcServer:(NSString*)rtcServer delegate:(id<IrisRtcVideoSessionDelegate>)delegate error:(NSError **)outError;
 
@@ -163,14 +175,14 @@
 /**
  * Joining a video session which involves starting a session and joining the room with room id which is received in notification
  *
- * @param sessionId room id
+ * @param sessionId         room id
  * @param roomToken         rooomtoken  which is received in notification.
- * @param roomTokenExpiryTime   rommtokenexpiry which is received in notification.
- * @param stream    local stream
- * @param rtcServer   rtcServerURL.
- * @param sessionConfig    IrisRtcSessionConfig object for setting additional optional session configuaration parameters.
- * @param delegate  The delegate object for IrisRtcVideoSession,used to receive the callbacks.
- * @param outError Provides error code and basic error description when any exception occured in api call.
+ * @param roomTokenExpiry   rommtokenexpiry which is received in notification.
+ * @param stream            local stream
+ * @param rtcServer         rtcServerURL.
+ * @param sessionConfig     IrisRtcSessionConfig object for setting additional optional session configuaration parameters.
+ * @param delegate          The delegate object for IrisRtcVideoSession,used to receive the callbacks.
+ * @param outError          Provides error code and basic error description when any exception occured in api call.
  */
 -(BOOL)joinWithSessionId:(NSString*)sessionId roomToken:(NSString*)roomToken roomTokenExpiryTime:(NSInteger)roomTokenExpiry stream:(IrisRtcStream*)stream rtcServer:(NSString*)rtcServer sessionConfig:(IrisRtcSessionConfig *)sessionConfig delegate:(id<IrisRtcVideoSessionDelegate>)delegate error:(NSError **)outError;
 

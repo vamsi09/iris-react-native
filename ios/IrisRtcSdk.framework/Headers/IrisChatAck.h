@@ -50,11 +50,10 @@
 /**
  * Initialize chat message class with message,messageId.
  *
- * @param rootNodeId rootNodeId.
- * @param messageId   messgeId.
- * @param rootNodeId  rootNodeId.
- * @param childNodeId childNodeId.
- * @param responseCode  responseCode.
+ * @param messageId        messgeId.
+ * @param rootNodeId       rootNodeId.
+ * @param childNodeId      childNodeId.
+ * @param evmResponseCode  responseCode.
  */
 -(id)initWithMessage:messageId rootNodeId:(NSString*)rootNodeId childNodeId:(NSString*)childNodeId evmResponseCode:(NSString*)evmResponseCode;
 

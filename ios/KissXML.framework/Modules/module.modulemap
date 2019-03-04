@@ -4,8 +4,3 @@ framework module KissXML {
   export *
   module * { export * }
 }
-
-module KissXML.Swift {
-    header "KissXML-Swift.h"
-    requires objc
-}

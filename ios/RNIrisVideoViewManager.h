@@ -7,6 +7,8 @@
 
 #ifndef RNIrisVideoViewManager_h
 #define RNIrisVideoViewManager_h
+#import <React/RCTViewManager.h>
+
 #import "RNIrisVideoView.h"
 
 @interface RNIrisVideoViewManager : RCTViewManager

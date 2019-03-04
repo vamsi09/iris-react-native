@@ -43,8 +43,9 @@
  * @param track pointer to the IrisRtcMediaTrack containing remote track.
  * @param participantId Participant Id.
  * @param roomId Room Id.
+ * @param traceId trace Id.
  */
--(void)onAddRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString *)participantId roomId:(NSString *)roomId;
+-(void)onAddRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString *)participantId roomId:(NSString *)roomId traceId:(NSString *)traceId;
 
 /**
  * This method is called when the remote stream is removed from the peerconnection.
@@ -52,8 +53,9 @@
  * @param track pointer to the IrisRtcMediaTrack containing remote track.
  * @param participantId Participant Id.
  * @param roomId Room Id.
+ * @param traceId trace Id.
  */
--(void)onRemoveRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString *)participantId roomId:(NSString *)roomId;
+-(void)onRemoveRemoteStream:(IrisRtcMediaTrack *)track participantId:(NSString *)participantId roomId:(NSString *)roomId traceId:(NSString *)traceId;
 
 /**
  * This method is called when the remote stream is added to peerconnection.
@@ -61,17 +63,19 @@
  * @param message Chat message string
  * @param participantId Participant Id sending the chat message
  * @param roomId Room Identifier for the allocated  chat room for the participants
+ * @param traceId trace Id.
  */
 
--(void)onSessionParticipantMessage:(IrisChatMessage *)message participantId:(NSString*)participantId roomId:(NSString*)roomId;
+-(void)onSessionParticipantMessage:(IrisChatMessage *)message participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 /**
  * This method is called as an  acknowledggment of  chat message sent to participant.
  *
  *
  * @param message ChatAck message string
  * @param roomId Room Identifier for the allocated  chat room for the participants
+ * @param traceId trace Id.
  */
--(void)onChatMessageSuccess:(IrisChatMessage*)message roomId:(NSString*)roomId;
+-(void)onChatMessageSuccess:(IrisChatMessage*)message roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 /**
  * This method is called as when  chat message is not sent to participant.
@@ -80,8 +84,9 @@
  * @param messageId messageid of chat message
  * @param info additional info about error.
  * @param roomId Room Identifier for the allocated  chat room for the participants
+ * @param traceId trace Id.
  */
--(void)onChatMessageError:(NSString*)messageId withAdditionalInfo:(NSDictionary *)info roomId:(NSString*)roomId;
+-(void)onChatMessageError:(NSString*)messageId withAdditionalInfo:(NSDictionary *)info roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 /**
  * This method is used for seding chat message state .
@@ -89,8 +94,9 @@
  * @param state chat state
  * @param participantId Participant Id sending the chat message
  * @param roomId Room Identifier for the allocated  chat room for the participants
+ * @param traceId trace Id.
  */
--(void)onChatMessageState:(IrisChatState)state participantId:(NSString*)participantId roomId:(NSString*)roomId;
+-(void)onChatMessageState:(IrisChatState)state participantId:(NSString*)participantId roomId:(NSString*)roomId traceId:(NSString *)traceId;
 
 
 @end
@@ -117,7 +123,7 @@
  * For anonymous room, set 'useAnonymousRoom' with room name and
  * pass nil as participants while creating session.
  */
-@property(nonatomic) NSString* useAnonymousRoom;
+//@property(nonatomic) NSString* useAnonymousRoom;
 
 
 /**
@@ -137,6 +143,15 @@
  * set isVideoBridgeEnable as true  to make calls using videobridge.
  */
 @property BOOL isVideoBridgeEnable;
+/**
+ * Creating and starting a video session using the anonymous room name.
+ *
+ * @param roomName anonymous room name.
+ * @param sessionConfig     IrisRtcSessionConfig object for setting additional optional session configuaration parameters.
+ * @param delegate     The delegate object for IrisRtcVideoSession used to receive the callbacks.
+ * @param outError Provides error code and basic error description when any exception occured in api call.
+ */
+-(BOOL)createWithRoomName:(NSString* )roomName sessionConfig:(IrisRtcSessionConfig *)sessionConfig delegate:(id<IrisRtcSessionDelegate>)delegate error:(NSError**)outError;
 
 /**
  * Creating and starting a video session using the room id for the room which has been already allocated for the invloved participants.
@@ -239,6 +254,9 @@
  */
 /**
  * This method is used to upgrade to video sesssion from chat session.
+ *
+ * @param stream                Stream object
+ * @param notificationData      Notification data
  */
 -(void)upgradeToVideo:(IrisRtcStream*)stream notificationData:(NSString*)notificationData;
 /**-----------------------------------------------------------------------------
@@ -256,6 +274,9 @@
  */
 /**
  * This method is used for sending chat message.
+ *
+ * @param message   Chat message that need to be send.
+ * @param outError  Provides error code and basic error description when any exception occured in api call.
  */
 -(BOOL)sendChatMessage:(IrisChatMessage*)message error:(NSError**)outError;
 /**-----------------------------------------------------------------------------
@@ -264,6 +285,8 @@
  */
 /**
  * This method is used for sending chat state.
+ *
+ * @param state   Chat state
  */
 -(void)sendChatState:(IrisChatState)state;
 
@@ -277,8 +300,6 @@
 -(void)close;
 /**
  * This api is used to collect stats of session.
- *
- *
  */
 -(NSArray *)getstats;
 
