@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06066F281ED601F700526E11 /* IrisRtcSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06066F271ED601F700526E11 /* IrisRtcSdk.framework */; };
 		067A3D141F0A87F100EFAFAF /* RNIrisSdkVideoCallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 067A3D131F0A87F100EFAFAF /* RNIrisSdkVideoCallView.m */; };
 		067A3D1A1F0A88D600EFAFAF /* RNIrisSdkVideoCallViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 067A3D191F0A88D600EFAFAF /* RNIrisSdkVideoCallViewManager.m */; };
 		0688B81E1F2F836E003EA38E /* RNIrisSdkStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688B81D1F2F836E003EA38E /* RNIrisSdkStreamManager.m */; };
 		0688B8201F2FB0BA003EA38E /* RNIrisVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688B81F1F2FB0BA003EA38E /* RNIrisVideoView.m */; };
 		0688B8221F2FB0CA003EA38E /* RNIrisVideoViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0688B8211F2FB0CA003EA38E /* RNIrisVideoViewManager.m */; };
+		2B74C3D7222D8A1700CFF5F4 /* IrisRtcSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06066F271ED601F700526E11 /* IrisRtcSdk.framework */; };
+		2B74C3DD222D8A1900CFF5F4 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B74C3D8222D8A1800CFF5F4 /* CocoaLumberjack.framework */; };
+		2B74C3DE222D8A1900CFF5F4 /* KissXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B74C3D9222D8A1800CFF5F4 /* KissXML.framework */; };
+		2B74C3DF222D8A1900CFF5F4 /* XMPPFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B74C3DA222D8A1800CFF5F4 /* XMPPFramework.framework */; };
+		2B74C3E0222D8A1900CFF5F4 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B74C3DB222D8A1800CFF5F4 /* CocoaAsyncSocket.framework */; };
+		2B74C3E1222D8A1900CFF5F4 /* libPhoneNumber_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B74C3DC222D8A1900CFF5F4 /* libPhoneNumber_iOS.framework */; };
 		B3E7B58A1CC2AC0600A0062D /* RNIrisSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNIrisSdk.m */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +50,11 @@
 		0688B8241F2FB0DD003EA38E /* RNIrisVideoViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNIrisVideoViewManager.h; sourceTree = "<group>"; };
 		06BF29B41F068A0C0062D181 /* RNIrisSdk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNIrisSdk-Bridging-Header.h"; sourceTree = "<group>"; };
 		134814201AA4EA6300B7C361 /* libRNIrisSdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNIrisSdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B74C3D8222D8A1800CFF5F4 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = "<group>"; };
+		2B74C3D9222D8A1800CFF5F4 /* KissXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KissXML.framework; sourceTree = "<group>"; };
+		2B74C3DA222D8A1800CFF5F4 /* XMPPFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XMPPFramework.framework; sourceTree = "<group>"; };
+		2B74C3DB222D8A1800CFF5F4 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		2B74C3DC222D8A1900CFF5F4 /* libPhoneNumber_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libPhoneNumber_iOS.framework; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNIrisSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNIrisSdk.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNIrisSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIrisSdk.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,7 +64,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06066F281ED601F700526E11 /* IrisRtcSdk.framework in Frameworks */,
+				2B74C3DD222D8A1900CFF5F4 /* CocoaLumberjack.framework in Frameworks */,
+				2B74C3DE222D8A1900CFF5F4 /* KissXML.framework in Frameworks */,
+				2B74C3DF222D8A1900CFF5F4 /* XMPPFramework.framework in Frameworks */,
+				2B74C3E0222D8A1900CFF5F4 /* CocoaAsyncSocket.framework in Frameworks */,
+				2B74C3E1222D8A1900CFF5F4 /* libPhoneNumber_iOS.framework in Frameworks */,
+				2B74C3D7222D8A1700CFF5F4 /* IrisRtcSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +79,11 @@
 		06066F1E1ED5FF6800526E11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B74C3DB222D8A1800CFF5F4 /* CocoaAsyncSocket.framework */,
+				2B74C3D8222D8A1800CFF5F4 /* CocoaLumberjack.framework */,
+				2B74C3D9222D8A1800CFF5F4 /* KissXML.framework */,
+				2B74C3DC222D8A1900CFF5F4 /* libPhoneNumber_iOS.framework */,
+				2B74C3DA222D8A1800CFF5F4 /* XMPPFramework.framework */,
 				06066F231ED600D500526E11 /* IrisRtcSdk.framework */,
 				06066F211ED5FFDE00526E11 /* IrisRtcSdk.framework */,
 				06066F1F1ED5FF6800526E11 /* AVFoundation.framework */,
