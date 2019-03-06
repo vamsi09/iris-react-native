@@ -433,9 +433,9 @@ RCT_EXPORT_METHOD(createAudioSession1:(NSString*)targetTN _sourceTelephoneNumber
  * @param delegate     delegate object for IrisRtcAudioSession,used to receive the callbacks
  * @param outError Provides error code and basic error description when any exception occured in api call.
  */
-RCT_EXPORT_METHOD(joinAudioSession:(NSString*)roomId roomToken:(NSString*)roomToken roomTokenExpiryTime:(NSInteger)roomTokenExpiry rtcServer:(NSString*)_rtcServer)
+RCT_EXPORT_METHOD(joinAudioSession:(NSString*)roomId roomToken:(NSString*)roomToken roomTokenExpiryTime:(NSInteger)roomTokenExpiry rtcServer:(NSString*)_rtcServer targetTN:(NSString*)targetTN)
 {
-    RCTLogInfo(@"React::IrisRtcSdk joinAudioSession called with roomId %@ & roomToken %@ roomTokenExpiryTime %ld", roomId, roomToken, roomTokenExpiry);
+    RCTLogInfo(@"React::IrisRtcSdk joinAudioSession called with roomId %@ & roomToken %@ roomTokenExpiryTime %ld", roomId, roomToken, (long)roomTokenExpiry);
     
     if (audioStream == nil)
     {
@@ -443,6 +443,7 @@ RCT_EXPORT_METHOD(joinAudioSession:(NSString*)roomId roomToken:(NSString*)roomTo
                                                cameraType:kCameraTypeFront delegate:self error:nil];
         RCTLogInfo(@"React::IrisRtcSdk createAudioStream done ");
     }
+     [audioStream startPreview];
     audioSession = [[IrisRtcAudioSession alloc] init];
     audioSession.autoDisconnect = true;
 
@@ -451,6 +452,31 @@ RCT_EXPORT_METHOD(joinAudioSession:(NSString*)roomId roomToken:(NSString*)roomTo
     IrisRtcSessionConfig *sessionConfig = [[IrisRtcSessionConfig alloc]init];
 
     [audioSession joinWithSessionId:roomId roomToken:roomToken roomTokenExpiryTime:roomTokenExpiry stream:audioStream rtcServer:_rtcServer sessionConfig:sessionConfig delegate:self error:nil];
+    
+    if (audioSessionArray == nil)
+    {
+        audioSessionArray = [[NSMutableDictionary alloc] init];
+    }
+    audioSessionArray[targetTN] = audioSession;
+}
+
+
+
+/**
+ * This method is to reject the incoming call
+ */
+RCT_EXPORT_METHOD(reject:(NSString*)sessionId toId:(NSString *) toId traceId:(NSString *) traceId server:(NSString *) server)
+{
+    if ([IrisRtcConnection  sharedInstance].state != kConnectionStateAuthenticated)
+    {
+        RCTLogInfo(@"React::RTC connection is not connected");
+        // [[IrisRtcConnection  sharedInstance] disconnect];
+        //[self sendEventWithName:IrisEventOnConnected body:nil];
+        return;
+        
+    }
+    
+    [IrisRtcAudioSession reject:sessionId toId:toId traceId:traceId server:server error:nil];
 }
 
 /**
